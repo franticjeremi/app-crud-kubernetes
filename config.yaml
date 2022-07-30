@@ -12,5 +12,5 @@ metadata:
   name: app-crud-config
 data:
   DB_USER: puser
-  DB_HOST: 0.0.0.0
+  DB_HOST: 127.0.0.1
   DB_NAME: crud
