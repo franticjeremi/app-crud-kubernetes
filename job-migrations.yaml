@@ -1,0 +1,59 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: app-crud-migration
+  labels:
+    app: app-crud
+spec:
+  template:
+    spec:
+      initContainers:
+        - name: init-container
+          image: jgoclawski/wget
+          volumeMounts:
+            - mountPath: /dump
+              name: data
+          args: [ "wget", "https://github.com/franticjeremi/app-crud/archive/refs/heads/main.zip", "-P", "/dump" ]
+      containers:
+        - name: migration-container
+          image: python:3.8-alpine
+          env:
+            - name: DB_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: app-crud-secret
+                  key: DB_PASS
+            - name: DB_USER
+              valueFrom:
+                configMapKeyRef:
+                  name: app-crud-config
+                  key: DB_USER
+            - name: DB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: app-crud-config
+                  key: DB_HOST
+            - name: DB_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: app-crud-config
+                  key: DB_NAME
+          command:
+            - /bin/sh
+            - -c
+            - |
+              echo "Start"
+              cd /dump
+              unzip main.zip
+              cd app-crud-main
+              pip install -r requirements.txt
+              alembic upgrade head
+              echo "Done"
+          volumeMounts:
+            - mountPath: "/dump"
+              name: data
+      volumes:
+        - emptyDir: { }
+          name: data
+      restartPolicy: Never
+  backoffLimit: 0
