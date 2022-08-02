@@ -11,3 +11,4 @@ kubectl apply -f config.yaml -f deployment.yaml -f service.yaml -f ingress.yaml
 
 kubectl delete daemonsets,replicasets,services,deployments,pods,rc,ingress,job --all --all-namespaces
 
+arch.homework/docs
