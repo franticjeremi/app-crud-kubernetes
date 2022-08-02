@@ -1,5 +1,5 @@
-postgresql:
-  auth:
-    username: puser
-    secretKeys:
-      userPasswordKey:  MTIyMzM0
+global:
+  postgresql:
+    auth:
+      postgresPassword: "MTIyMzM0"
+

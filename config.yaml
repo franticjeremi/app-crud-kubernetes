@@ -4,13 +4,13 @@ metadata:
   name: app-crud-secret
 type: Opaque
 data:
-  DB_PASS: MTIyMzM0
+  DB_PASS: "MTIyMzM0"
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: app-crud-config
 data:
-  DB_USER: puser
-  DB_HOST: 127.0.0.1
-  DB_NAME: crud
+  DB_USER: postgres
+  DB_PASS1: "avOZlz5vpU"
+  DB_NAME: postgres

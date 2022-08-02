@@ -20,19 +20,16 @@ spec:
           env:
             - name: DB_PASS
               valueFrom:
-                secretKeyRef:
-                  name: app-crud-secret
-                  key: DB_PASS
+                configMapKeyRef:
+                  name: app-crud-config
+                  key: DB_PASS1
             - name: DB_USER
               valueFrom:
                 configMapKeyRef:
                   name: app-crud-config
                   key: DB_USER
             - name: DB_HOST
-              valueFrom:
-                configMapKeyRef:
-                  name: app-crud-config
-                  key: DB_HOST
+              value: app-crud-postgresql.default
             - name: DB_NAME
               valueFrom:
                 configMapKeyRef:
