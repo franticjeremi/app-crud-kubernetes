@@ -9,6 +9,6 @@ kubectl apply -f config.yaml -f job-migrations.yaml
 
 kubectl apply -f config.yaml -f deployment.yaml -f service.yaml -f ingress.yaml
 
-kubectl delete daemonsets,replicasets,services,deployments,pods,rc,ingress,job --all --all-namespaces
+newman run user.postman_collection.json
 
-arch.homework/docs
+kubectl delete daemonsets,replicasets,services,deployments,pods,rc,ingress,job --all --all-namespaces
